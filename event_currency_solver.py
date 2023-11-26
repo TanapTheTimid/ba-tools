@@ -1,5 +1,4 @@
 from ortools.sat.python import cp_model
-import numpy as np 
 
 
 # AP usage of each level
@@ -12,7 +11,7 @@ RESOURCE_LIST = [[21,  0,  0, 26,   32,  0,  0, 42,   45, 26, 26, 64],
                  [ 3,  6, 20,  0,    6, 12, 30,  0,   12,  0, 42,  0],]
 
 # Currency target
-REQUIREMENT_LIST = [0, 1920, 10225]
+REQUIREMENT_LIST = [8588, 1920, 10225]
 
 # The amount of AP used to clear initially
 INITIAL_CLEAR_AP = 285
@@ -45,7 +44,7 @@ solver = cp_model.CpSolver()
 status = solver.Solve(model)
 
 if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-    print(f"Minimum of objective function: {solver.ObjectiveValue()}\n")
+    print(f"Minimum AP required: {solver.ObjectiveValue()}\n")
     for i in range(len(AP_USAGE_LIST)):
         print(f"q{i+1} = {solver.Value(qs[i])}")
 else:
