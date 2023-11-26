@@ -20,15 +20,15 @@ INITIAL_CLEAR_AP = 305
 INITIAL_CLEAR = [2248, 1588, 1588]
 
 # Upper Bound - set to 0 for each stage you want to avoid
-i = 1000000
-var_upper_bound = [0,0,0,0, 0,0,0,0, i,i,i,i]
+I = 1000000
+VAR_UPPER_BOUND = [0,0,0,0, 0,0,0,0, I,I,I,I]
 
 
 # Solver
 model = cp_model.CpModel()
 qs = []
 for i in range(1,len(AP_USAGE_LIST)+1):
-    qs += [model.NewIntVar(0, var_upper_bound[i-1], "q" + str(i))]
+    qs += [model.NewIntVar(0, VAR_UPPER_BOUND[i-1], "q" + str(i))]
 
 for j, constraint in enumerate(RESOURCE_LIST):
     f_i = constraint[0] * qs[0]
